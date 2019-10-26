@@ -4,8 +4,8 @@ class poolController {
         
     }
     
-    aMethod(){
-        return "A pool method";
+    aMethod(pageNumber){
+        return "A pool method, page number "+pageNumber;
     }
 }
 
