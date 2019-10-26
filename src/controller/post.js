@@ -4,8 +4,8 @@ class postController {
         
     }
     
-    aMethod(){
-        return "A post method";
+    aMethod(data){
+        return "A post method with data "+JSON.stringify(data);
     }
 }
 

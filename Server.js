@@ -3,11 +3,13 @@
 
 const http = require("http");
 const url = require("url");
+const { parse } = require('querystring');
 
 let dispatch = Object.create(null);
 dispatch.GET = (request, response) => {
     let controller;
     let fullPath = url.parse(request.url).pathname.split("/");
+    console.log(request.parser)
     
     switch (fullPath[1]) {
         case "post":            
@@ -31,26 +33,36 @@ dispatch.GET = (request, response) => {
     }
 }
 
-dispatch.PUT = (request, response) => {
+dispatch.POST = (request, response) => {
     let controller;
     let fullPath = url.parse(request.url).pathname.split("/");
+    let message = '';
     
-    switch (fullPath[1]) {
-        case "post":            
-            controller = require("./src/controller/post.js");
-            response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
-            response.end(controller.aMethod());
-            break;
-        case "login":            
-            controller = require("./src/controller/login.js");
-            response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
-            //response.writeHead(304, {'Location': '/pool' ,"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
-            response.end(controller.aMethod());
-            break;
-        default:
-            response.writeHead(404, {'Content-Type': 'text/plain', "Access-Control-Allow-Origin": '*'});
-            response.end('Not found\n');
-    }
+    request.on('data', data =>{
+        message += data.toString();
+    })
+    
+    request.on('end', dummyVariable =>{
+        let parsedMessage;
+        parsedMessage = parse(message) 
+        
+        switch (fullPath[1]) {
+            case "post":            
+                controller = require("./src/controller/post.js");
+                response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
+                response.end(controller.aMethod(parsedMessage));
+                break;
+            case "login":            
+                controller = require("./src/controller/login.js");
+                response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
+                //response.writeHead(304, {'Location': '/pool' ,"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
+                response.end(controller.aMethod(parsedMessage));
+                break;
+            default:
+                response.writeHead(404, {'Content-Type': 'text/plain', "Access-Control-Allow-Origin": '*'});
+                response.end('Not found\n');
+        }
+    })  
 }
 
 http.createServer((request, response) => {

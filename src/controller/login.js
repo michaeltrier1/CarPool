@@ -4,8 +4,8 @@ class loginController {
         
     }
     
-    aMethod(){
-        return "A login method";
+    aMethod(data){
+        return "A login method with data: "+JSON.stringify(data);
     }
 }
 
