@@ -1,9 +1,10 @@
 class poolController {
-    
-    constructor(){
-        
+
+    constructor(model, view){
+        this.model = model;
+        this.view = view;
     }
-    
+
     aMethod(pageNumber){
         return "A pool method, page number "+pageNumber;
     }
