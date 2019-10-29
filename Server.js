@@ -12,6 +12,12 @@ dispatch.GET = (request, response) => {
     console.log(request.parser)
     
     switch (fullPath[1]) {
+        case "":
+        case "index":
+            controller = require("./src/controller/index.js");
+            response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
+            response.end(controller.aMethod());
+            break; 
         case "post":            
             controller = require("./src/controller/post.js");
             response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
