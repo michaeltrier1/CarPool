@@ -25,12 +25,6 @@ dispatch.GET = (request, response) => {
         case "post":
             controller = require("./src/controller/post.js");
             response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
-               var posts = [
-                {title: "Hej", description: "yo"},
-                {title: "Hej", description: "yo"},
-                {title: "Hej", description: "yo"}
-                            ]
-            response.render("post.ejs",{posts:posts});
             response.end(controller.aMethod());
             break;
         case "login":
