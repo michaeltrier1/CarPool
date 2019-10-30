@@ -6,10 +6,11 @@ app.post('/submit',function(req,res){
     var email=req.body.email;
     var password=req.body.password;
 
+
     connect.connect(function(err){
       if (err) throw err;
       console.log("Connected");
-      var sql = "INSERT INTO users (username, email,password) VALUES ('"+username+"', '"+email+"','"+password+"')";  
+      var sql = "INSERT INTO users (username, email,password) VALUES ('"+username+"', '"+email+"','"+password+"')";
     });
 
     con.query(sql, function(err,result){
