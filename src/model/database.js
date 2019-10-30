@@ -1,6 +1,6 @@
 var exports = module.exports;
-
-var mysql = require('pg');
+/*
+var mysql = require('mysql');
 
 var connect = mysql.createConnection({
     host:"balarama.db.elephantsql.com",
@@ -21,7 +21,20 @@ connect.connect(function(err){
     });
 });
 
+*/
+var postGre = require('pg');
+
+let connectionString = process.env.ELEPHANTSQL_URL || "postgres://rqudjcey:0XBP0dAZ7j39d5Gu3nYuC3xl95Rz-Hr0@balarama.db.elephantsql.com/ip:5432/rqudjcey";
+
+let client = new postGre.Client(connectionString);
+
+client.connect(function(err){
+    client.query("Delete FROM users WHERE true", function(err, result){
+        
+        console.log("inside query");
+        //client.end();
+    })
+})
 
 
-
-exports.connecton = connect;
+//exports.connecton = connect;
