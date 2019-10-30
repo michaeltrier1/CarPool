@@ -1,11 +1,9 @@
-app.get('/',function(req, res){
-    res.sendFile(path.join(__dirname+'/index.html'));
-});
-app.post('/submit',function(req,res){
-    var username=req.body.username;
-    var email=req.body.email;
-    var password=req.body.password;
+class userModel{
 
+  var connect = require('./src/core/database.js');
+
+
+  saveUser(username, email, password){
 
     connect.connect(function(err){
       if (err) throw err;
@@ -18,4 +16,20 @@ app.post('/submit',function(req,res){
         console.log("user succesfully inserted");
         res.end();
     });
-});
+
+    deleteUser(userid){
+      connect.connect(function(err){
+        if (err) throw err;
+        console.log("Connected");
+        var sql = "DELETE FROM users WHERE userid='?'";
+      });
+
+      con.query(sql, function(err,result){
+          if (err) throw err;
+          console.log("user succesfully deleted");
+          res.end();
+      });
+
+    }
+}
+module.exports= new userModel();

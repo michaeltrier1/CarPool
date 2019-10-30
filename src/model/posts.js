@@ -1,44 +1,52 @@
 Class postModel {
 
     var connect = require('./src/core/database.js');
-    
-    Constructor(){ 
+
+    Constructor(){
     }
-    
+
     savePost(title, text, fromLocation, toLocation){
-/*        var title=req.body.title;
-        var text=req.body.text;
-        var fromLoaction=req.body.fromLocation;
-        var toLoaction=req.body.toLocation;
-*/
-        
+
         connect.connect(function(err){
             if (err) throw err;
             console.log("Connected");
             var sql = "INSERT INTO posts (title, text,fromLoaction, toLoaction) VALUES ('"+title+"', '"+text+"','"+fromLocation+"','"+toLocation+"')";  });
-        
+
         con.query(sql, function(err,result){
             if (err) throw err;
             console.log("post succesfully inserted");
             res.end();
         });
-    }
-    
-    loadPost(startNumber, endNumber){
+
+
+    loadPost(postid, title, text, userid, fromLocation, toLocation, timestamp){
         connect.connect(function(err){
             if (err) throw err;
             console.log("Connected");
-            var sql = "Select INTO posts (title, text,fromLoaction, toLoaction) VALUES ('"+title+"', '"+text+"','"+fromLocation+"','"+toLocation+"')";  });
-        
+            var sql = "SELECT * FROM posts";
+
         con.query(sql, function(err,result){
             if (err) throw err;
-            console.log("post succesfully inserted");
+            console.log("post succesfully loaded");
+            res.end();
+        });
+
+
+    deletePost(postid, title, text, userid, fromLocation, toLocation, timestamp){
+        connect.connect(function(err){
+            if (err) throw err;
+            console.log("Connected");
+            var sql = "DELETE FROM posts WHERE postid='?'";
+
+        con.query(sql, function(err,result){
+            if (err) throw err;
+            console.log("post succesfully deleted");
             res.end();
         });
     }
-        
+
 }
-    
+
 
 
 module.exports = new postModel();
