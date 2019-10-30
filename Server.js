@@ -57,6 +57,7 @@ dispatch.POST = (request, response) => {
                 controller = require("./src/controller/post.js");
                 response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
                 var posts = [{title: "Hej", description: "yo"}]
+                res.render("posts.ejs",{posts:posts})
                 response.end(controller.aMethod(parsedMessage));
                 break;
             case "login":
@@ -78,6 +79,6 @@ http.createServer((request, response) => {
     catch (err) {
         response.writeHead(405, {'Content-Type': 'text/plain'});
         response.end('Method not allowed\n');
-        console.log("Listening")
+        //console.log(err)
     }
 }).listen(8080);
