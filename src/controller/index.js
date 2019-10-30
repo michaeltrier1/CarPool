@@ -1,13 +1,13 @@
 class indexController {
 
     constructor(model, view){
-      this.model = model;
-      this.view = view;
+        this.model = model;
+        this.view = view;
     }
 
     aMethod(data){
 
-        return  ; //+JSON.stringify(data);
+        return "A index method " + JSON.stringify(data);
     }
 }
 
