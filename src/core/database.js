@@ -1,8 +1,6 @@
-var exports = module.exports;
 
 var mysql = require('mysql');
-
-var connect = mysql.createConnection({
+var connection = mysql.createConnection({
 
   host:"balarama.db.elephantsql.com",
   user:"rqudjcey",
@@ -10,9 +8,12 @@ var connect = mysql.createConnection({
 
 });
 
-connect.connect(function(err){
-  if (err) throw err;
-  console.log("Connected");
+connection.connect(function(err){
+  if (err) {
+  console.log("Error connecting to database");
+}else {
+  console.log("Database is connected");
+}
 });
 
 exports.connecton = connect;

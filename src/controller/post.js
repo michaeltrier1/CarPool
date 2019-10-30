@@ -1,7 +1,7 @@
 class postController {
 
     constructor(model, view){
-        this.model =  model;
+        this.model = model;
         this.view = view;
     }
 
