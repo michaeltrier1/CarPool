@@ -1,3 +1,6 @@
+//let model = require('./src/model/postModel.js');
+//let view = require('./src/view/database.js);
+
 class postController {
 
     constructor(model, view){
@@ -6,8 +9,10 @@ class postController {
     }
 
     aMethod(data){
+
         return "A post method with data "+JSON.stringify(data);
     }
 }
 
-module.exports = new postController();
+//module.exports = new postController(model, view);
+module.exports = new postController(;

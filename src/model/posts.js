@@ -24,12 +24,14 @@ Class postModel {
             if (err) throw err;
             console.log("Connected");
             var sql = "SELECT * FROM posts";
+        });
 
         con.query(sql, function(err,result){
             if (err) throw err;
             console.log("post succesfully loaded");
             res.end();
         });
+    }
 
 
     deletePost(postid){
