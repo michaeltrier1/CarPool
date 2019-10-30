@@ -32,7 +32,7 @@ Class postModel {
         });
 
 
-    deletePost(postid, title, text, userid, fromLocation, toLocation, timestamp){
+    deletePost(postid){
         connect.connect(function(err){
             if (err) throw err;
             console.log("Connected");
