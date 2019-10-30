@@ -1,3 +1,5 @@
+var connect = require('./database1.js');
+
 app.get('/',function(req, res){
 
 res.sendFile(path.join(__dirname+'/posts.html'));
@@ -20,4 +22,4 @@ con.query(sql, function(err,result){
   res.end();
 
 });
-};
+});
