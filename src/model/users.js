@@ -34,7 +34,7 @@ class userModel{
     authUser(){
         let databaseCore = require('./core/database.js');
 
-        client.query('SELECT * from users where username=('"+username+"','"password"', (err, res) =>{
+        client.query('SELECT * from users where username=('"+username+"','"+password+"', (err, res) =>{
             console.log('inside query');
             console.log(res)
             client.end()
