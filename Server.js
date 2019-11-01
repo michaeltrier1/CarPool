@@ -1,13 +1,28 @@
 /* eslint-env es6, node */
 /* eslint no-console: 0 */
 
-
 const http = require("http");
 const url = require("url");
 const { parse } = require('querystring');
 var express = require("express");
+
 var app = express();
 app.set('view engine', 'ejs');
+
+//Fjernes senere
+app.get("/posts", function(req, res){
+    var posts = [
+        {title: "Post 1", description: "Yeees"},
+         {title: "Post 2", description: "Yeees2"},
+         {title: "Post 3", description: "Yeees3"}
+    ];
+    res.render("post.ejs", {posts: posts});  
+});
+
+//Fjernes senere
+app.listen(3000,function(){
+    console.log("Listening on portal 3000");
+}); 
 
 let dispatch = Object.create(null);
 dispatch.GET = (request, response) => {
@@ -74,23 +89,6 @@ dispatch.POST = (request, response) => {
         }
     })
 }
-//Fjernes senere
-app.get("/posts", function(req, res){
-    var posts = [
-        {title: "Post 1", description: "Yeees"},
-         {title: "Post 2", description: "Yeees2"},
-         {title: "Post 3", description: "Yeees3"}
-    ];
-    res.render("post.ejs", {posts: posts});
-    
-
- 
-    
-})
-//Fjernes senere
-app.listen(3000,function(){
-    console.log("Listening on portal 3000");
-}); 
 
 http.createServer((request, response) => {
     console.log(request.method, request.url);
