@@ -1,35 +1,18 @@
 class userModel{
 
-  var connect = require('./src/core/database.js');
 
 
   saveUser(username, email, password){
 
-    connect.connect(function(err){
-      if (err) throw err;
+    client.connect(function(err){
+
       console.log("Connected");
-      var sql = "INSERT INTO users (username, email,password) VALUES ('"+username+"', '"+email+"','"+password+"')";
+      client.query('INSERT INTO users(username, email, password)VALUES("derp","derpmail2","derpypw")',(err, res){
+        console.log('inside query');
+        console.log(res)
+        client.end();
+      });
     });
 
-    con.query(sql, function(err,result){
-        if (err) throw err;
-        console.log("user succesfully inserted");
-        res.end();
-    });
-
-    deleteUser(userid){
-      connect.connect(function(err){
-        if (err) throw err;
-        console.log("Connected");
-        var sql = "DELETE FROM users WHERE userid='?'";
-      });
-
-      con.query(sql, function(err,result){
-          if (err) throw err;
-          console.log("user succesfully deleted");
-          res.end();
-      });
-
-    }
 }
-module.exports= new userModel();
+        
