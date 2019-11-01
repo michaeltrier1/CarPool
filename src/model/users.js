@@ -5,8 +5,8 @@ class userModel{
     
     saveUser(username, email, password){
         //console.log("entered saveUser")
-
-        let databaseCore = require('./core/database.js');
+        let path = require('path');
+        let databaseCore = require(path.join(__dirname, '../core/database.js'));
         //console.log("before entering databaseCore connect")
         
         databaseCore.connect((client) => {
