@@ -1,3 +1,8 @@
+const ejs = require('ejs');
+const fs = require('fs');
+const path = require('path');
+
+
 class poolController {
 
     constructor(model, view){
@@ -7,9 +12,9 @@ class poolController {
 
     aMethod(pageNumber){
         
-        
-var htmlContent = fs.readFileSync(__dirname + '../src/views/post.ejs', 'utf8');
-    var htmlRenderized = ejs.render(htmlContent, {filename: 'post.ejs', posts: posts});
+var path1 = path.join(__dirname, '../views/post.ejs');
+   var htmlContent = fs.readFileSync(path1, 'utf8');
+    var htmlRenderized = ejs.render(htmlContent, {filename: 'post.ejs'});
    
 
         return htmlRenderized;

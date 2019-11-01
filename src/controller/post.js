@@ -21,8 +21,6 @@ class postController {
     var htmlContent = fs.readFileSync(path1, 'utf8');
     var htmlRenderized = ejs.render(htmlContent, {filename: 'post.ejs', posts: posts});
 
-  //  res.render("../src/views/post", {posts: posts});
-
         return htmlRenderized;
     }
 }

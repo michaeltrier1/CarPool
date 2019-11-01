@@ -28,6 +28,12 @@ function populateCards(array){
 
 };
 
+    <% posts.forEach(function(post){ %>
+      <li>
+      <%= post.title %>
+          </li>
+<%     }) %>
+
 /*<div class="card">
   <div class="card-body">
     <h4 class="card-title" id="cardTitle">Svendborg-SDU</h4>

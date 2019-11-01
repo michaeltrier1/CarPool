@@ -14,29 +14,6 @@ app.set('view engine', 'ejs');
 const ejs = require('ejs');
 const fs = require('fs');
 
-
-//Fjernes senere
-
-
-
-
-
-app.get("/posts", function(req, res){
-    var posts = [
-        {title: "Post 1", description: "Yeees"},
-         {title: "Post 2", description: "Yeees2"},
-         {title: "Post 3", description: "Yeees3"}
-    ];
-    var htmlContent = fs.readFileSync(__dirname + '/views/post.ejs', 'utf8');
-    var htmlRenderized = ejs.render(htmlContent, {filename: 'post.ejs', posts: posts});
-   
-  //  res.render("../src/views/post", {posts: posts});    
-})
-//Fjernes senere
-app.listen(3000,function(){
-    console.log("Listening on portal 3000");
-}); 
-
 let dispatch = Object.create(null);
 dispatch.GET = (request, response) => {
     let controller;
@@ -47,7 +24,7 @@ dispatch.GET = (request, response) => {
         case "":
         case "index":
             controller = require("./src/controller/index.js");
-            response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
             response.end(controller.aMethod());
             break;
         case "post":
@@ -57,14 +34,24 @@ dispatch.GET = (request, response) => {
             break;
         case "login":
             controller = require("./src/controller/login.js");
-            response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
             response.end(controller.aMethod());
             break;
         case "pool":
             controller = require("./src/controller/pool.js");
-            response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
             response.end(controller.aMethod(fullPath[2]));
             break;
+         case "createUser":
+            controller = require("./src/controller/createUser.js");
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+            response.end(controller.aMethod());
+            break; 
+         case "createPool":
+            controller = require("./src/controller/createPool.js");
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+            response.end(controller.aMethod());
+            break;     
         default:
             response.writeHead(404, {'Content-Type': 'text/plain', "Access-Control-Allow-Origin": '*'});
             response.end('Not found\n');
