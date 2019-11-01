@@ -7,9 +7,6 @@ const url = require("url");
 const { parse } = require('querystring');
 
 
-var express = require("express");
-var app = express();
-app.set('view engine', 'ejs');
 
 const ejs = require('ejs');
 const fs = require('fs');
@@ -76,15 +73,26 @@ dispatch.POST = (request, response) => {
                 controller = require("./src/controller/post.js");
                 response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
                 response.end(controller.aMethod(parsedMessage));
+                 console.log(parsedMessage);
                 break;
-            case "login":
-               
+            case "login":       
                 controller = require("./src/controller/login.js");
                 response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
                 //response.writeHead(304, {'Location': '/pool' ,"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
                  console.log(parsedMessage);
                 response.end(controller.aMethod(parsedMessage));
                 break;
+            case "createUser":
+            controller = require("./src/controller/createUser.js");
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+            response.end(controller.aMethod());
+            break; 
+              case "createPool":
+            controller = require("./src/controller/createPool.js");
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+            console.log(parsedMessage);
+            response.end(controller.aMethod());
+            break; 
             default:
                 response.writeHead(404, {'Content-Type': 'text/plain', "Access-Control-Allow-Origin": '*'});
                 response.end('Not found\n');
