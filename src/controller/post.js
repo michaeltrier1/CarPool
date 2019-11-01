@@ -2,6 +2,7 @@
 //let view = require('./src/view/database.js);
 const ejs = require('ejs');
 const fs = require('fs');
+const path = require('path');
 
 class postController {
 
@@ -16,10 +17,11 @@ class postController {
          {title: "Post 2", description: "Yeees2"},
          {title: "Post 3", description: "Yeees3"}
     ];
-    var htmlContent = fs.readFileSync(__dirname + '../src/views/post.ejs', 'utf8');
+    var path1 = path.join(__dirname, '../views/post.ejs');
+    var htmlContent = fs.readFileSync(path1, 'utf8');
     var htmlRenderized = ejs.render(htmlContent, {filename: 'post.ejs', posts: posts});
-   
-  //  res.render("../src/views/post", {posts: posts}); 
+
+  //  res.render("../src/views/post", {posts: posts});
 
         return htmlRenderized;
     }
