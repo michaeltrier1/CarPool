@@ -6,8 +6,6 @@ const http = require("http");
 const url = require("url");
 const { parse } = require('querystring');
 
-
-
 const ejs = require('ejs');
 const fs = require('fs');
 
@@ -43,12 +41,12 @@ dispatch.GET = (request, response) => {
             controller = require("./src/controller/createUser.js");
             response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
             response.end(controller.aMethod());
-            break; 
+            break;
          case "createPool":
             controller = require("./src/controller/createPool.js");
             response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
             response.end(controller.aMethod());
-            break;     
+            break;
         default:
             response.writeHead(404, {'Content-Type': 'text/plain', "Access-Control-Allow-Origin": '*'});
             response.end('Not found\n');
@@ -76,10 +74,12 @@ dispatch.POST = (request, response) => {
                  console.log(parsedMessage);
                 break;
             case "login":       
+
+            case "login":
+
                 controller = require("./src/controller/login.js");
                 response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
                 //response.writeHead(304, {'Location': '/pool' ,"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
-                 console.log(parsedMessage);
                 response.end(controller.aMethod(parsedMessage));
                 break;
             case "createUser":
