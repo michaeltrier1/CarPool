@@ -14,29 +14,6 @@ app.set('view engine', 'ejs');
 const ejs = require('ejs');
 const fs = require('fs');
 
-
-//Fjernes senere
-
-
-
-
-
-app.get("/posts", function(req, res){
-    var posts = [
-        {title: "Post 1", description: "Yeees"},
-         {title: "Post 2", description: "Yeees2"},
-         {title: "Post 3", description: "Yeees3"}
-    ];
-    var htmlContent = fs.readFileSync(__dirname + '/views/post.ejs', 'utf8');
-    var htmlRenderized = ejs.render(htmlContent, {filename: 'post.ejs', posts: posts});
-   
-  //  res.render("../src/views/post", {posts: posts});    
-})
-//Fjernes senere
-app.listen(3000,function(){
-    console.log("Listening on portal 3000");
-}); 
-
 let dispatch = Object.create(null);
 dispatch.GET = (request, response) => {
     let controller;
