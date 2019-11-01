@@ -1,19 +1,31 @@
+class DatabaseCore {
+    
+    Constructor(){       
+    }
 
-var mysql = require('mysql');
-var connection = mysql.createConnection({
+    let pg = require('pg');
+    
+    let connectionString = 'postgres://rqudjcey:0XBP0dAZ7j39d5Gu3nYuC3xl95Rz-Hr0@balarama.db.elephantsql.com:5432/rqudjcey'    
+    
+    connect(queryToBeExecuted()){
+        let client = new pg.Client(connectionString);
+        
+        client.connect(function(err){
+            queryToBeExecuted();
+            /*
+            client.query('select * from users', function(err, result){
+                console.log('inside query');
+                console.log(result)
+                client.end();
+            });
+            */
+        });
+    }
 
-  host:"balarama.db.elephantsql.com",
-  user:"rqudjcey",
-  password:"0XBP0dAZ7j39d5Gu3nYuC3xl95Rz-Hr0",
+    getClient(){
+        return new pg.Client(connectionString);
+    }
 
-});
-
-connection.connect(function(err){
-  if (err) {
-  console.log("Error connecting to database");
-}else {
-  console.log("Database is connected");
 }
-});
 
-exports.connecton = connect;
+module.exports = new DatabaseCore();
