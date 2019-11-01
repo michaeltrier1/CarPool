@@ -16,7 +16,7 @@ class postController {
          {title: "Post 2", description: "Yeees2"},
          {title: "Post 3", description: "Yeees3"}
     ];
-    var htmlContent = fs.readFileSync(__dirname + '/post.ejs', 'utf8');
+    var htmlContent = fs.readFileSync(__dirname + '../src/views/post.ejs', 'utf8');
     var htmlRenderized = ejs.render(htmlContent, {filename: 'post.ejs', posts: posts});
    
   //  res.render("../src/views/post", {posts: posts}); 

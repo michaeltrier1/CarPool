@@ -52,10 +52,8 @@ dispatch.GET = (request, response) => {
             break;
         case "post":
             controller = require("./src/controller/post.js");
-            response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
-            //response.end(controller.aMethod());
-                            response.end("<div> this is in a div<p>this is in a paragraph</p></div>");
-
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+            response.end(controller.aMethod());
             break;
         case "login":
             controller = require("./src/controller/login.js");
