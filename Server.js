@@ -78,9 +78,11 @@ dispatch.POST = (request, response) => {
                 response.end(controller.aMethod(parsedMessage));
                 break;
             case "login":
+               
                 controller = require("./src/controller/login.js");
                 response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
                 //response.writeHead(304, {'Location': '/pool' ,"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
+                 console.log(parsedMessage);
                 response.end(controller.aMethod(parsedMessage));
                 break;
             default:
