@@ -79,7 +79,8 @@
     </div>
   </nav>
   <div class="container-fluid text-left">
-    <h1>SDU PENDLING</h1> 
+    <h1>SDU PENDLING</h1>
+    
     <div class="container" style="background-color:lavender;">
       <form action="" method="POST" onsubmit="">
         <div class="col">
@@ -104,17 +105,20 @@
   </div>
   <div class="container" style="background-color:pink;">
     <% for(var i = 0; i < posts.length; i++){ %>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-header"><%= posts[i].title %></div>
-                    </div>
-                    <div class="col-sm">
-                        <div class="card-body"><%=posts[i].description %></div>
-                <   /div>
-                    <%    }%>
-                    </div>
+      <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="card">
+            <div class="card-header"><%= posts[i].title %></div>
+             </div>
+        <div class="col-sm">
+          <div class="card-body"><%=posts[i].description %></div>
+                </div>
+    
+
+    <%    }%>
+
+  </div>
 </body>
 
 </html>

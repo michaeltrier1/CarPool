@@ -1,24 +1,37 @@
 /* eslint-env es6, node */
 /* eslint no-console: 0 */
 
+
 const http = require("http");
 const url = require("url");
 const { parse } = require('querystring');
-var express = require("express");
 
+
+var express = require("express");
 var app = express();
 app.set('view engine', 'ejs');
 
+const ejs = require('ejs');
+const fs = require('fs');
+
+
 //Fjernes senere
+
+
+
+
+
 app.get("/posts", function(req, res){
     var posts = [
         {title: "Post 1", description: "Yeees"},
          {title: "Post 2", description: "Yeees2"},
          {title: "Post 3", description: "Yeees3"}
     ];
-    res.render("post.ejs", {posts: posts});  
-});
-
+    var htmlContent = fs.readFileSync(__dirname + '/views/post.ejs', 'utf8');
+    var htmlRenderized = ejs.render(htmlContent, {filename: 'post.ejs', posts: posts});
+   
+  //  res.render("../src/views/post", {posts: posts});    
+})
 //Fjernes senere
 app.listen(3000,function(){
     console.log("Listening on portal 3000");
@@ -39,7 +52,7 @@ dispatch.GET = (request, response) => {
             break;
         case "post":
             controller = require("./src/controller/post.js");
-            response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
             response.end(controller.aMethod());
             break;
         case "login":
@@ -90,12 +103,13 @@ dispatch.POST = (request, response) => {
     })
 }
 
+
 http.createServer((request, response) => {
     console.log(request.method, request.url);
     try { dispatch[request.method](request, response); }
     catch (err) {
         response.writeHead(405, {'Content-Type': 'text/plain'});
         response.end('Method not allowed\n');
-        //console.log(err)
+        console.log(err)
     }
 }).listen(8080);

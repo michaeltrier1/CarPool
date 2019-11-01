@@ -6,8 +6,13 @@ class poolController {
     }
 
     aMethod(pageNumber){
-        return "A pool method, page number "+pageNumber;
+        
+        
+var htmlContent = fs.readFileSync(__dirname + '../src/views/post.ejs', 'utf8');
+    var htmlRenderized = ejs.render(htmlContent, {filename: 'post.ejs', posts: posts});
+   
+
+        return htmlRenderized;
     }
 }
-
 module.exports = new poolController();
