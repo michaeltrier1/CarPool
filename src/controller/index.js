@@ -1,3 +1,7 @@
+const ejs = require('ejs');
+const fs = require('fs');
+const path = require('path');
+
 class indexController {
 
     constructor(model, view){
@@ -6,8 +10,11 @@ class indexController {
     }
 
     aMethod(data){
+     var path1 = path.join(__dirname, '../views/index.ejs');
+    var htmlContent = fs.readFileSync(path1, 'utf8');
+    var htmlRenderized = ejs.render(htmlContent, {filename: 'index.ejs'});
 
-        return "A index method " + JSON.stringify(data);
+        return htmlRenderized;
     }
 }
 

@@ -1,10 +1,9 @@
+
 const ejs = require('ejs');
 const fs = require('fs');
 const path = require('path');
 
-class loginController {
-    
-
+class createPoolController {
 
     constructor(model, view){
         this.model = model;
@@ -12,12 +11,12 @@ class loginController {
     }
 
     aMethod(data){
-   var path1 = path.join(__dirname, '../views/login.ejs');
+     var path1 = path.join(__dirname, '../views/createPool.ejs');
     var htmlContent = fs.readFileSync(path1, 'utf8');
-    var htmlRenderized = ejs.render(htmlContent, {filename: 'login.ejs'});
+    var htmlRenderized = ejs.render(htmlContent, {filename: 'createPool.ejs'});
 
         return htmlRenderized;
     }
 }
 
-module.exports = new loginController();
+module.exports = new createPoolController();

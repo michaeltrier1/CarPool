@@ -47,7 +47,7 @@ dispatch.GET = (request, response) => {
         case "":
         case "index":
             controller = require("./src/controller/index.js");
-            response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
             response.end(controller.aMethod());
             break;
         case "post":
@@ -57,14 +57,24 @@ dispatch.GET = (request, response) => {
             break;
         case "login":
             controller = require("./src/controller/login.js");
-            response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
             response.end(controller.aMethod());
             break;
         case "pool":
             controller = require("./src/controller/pool.js");
-            response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
             response.end(controller.aMethod(fullPath[2]));
             break;
+         case "createUser":
+            controller = require("./src/controller/createUser.js");
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+            response.end(controller.aMethod());
+            break; 
+         case "createPool":
+            controller = require("./src/controller/createPool.js");
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+            response.end(controller.aMethod());
+            break;     
         default:
             response.writeHead(404, {'Content-Type': 'text/plain', "Access-Control-Allow-Origin": '*'});
             response.end('Not found\n');
