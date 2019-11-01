@@ -5,9 +5,37 @@
 const http = require("http");
 const url = require("url");
 const { parse } = require('querystring');
+
+
 var express = require("express");
 var app = express();
 app.set('view engine', 'ejs');
+
+const ejs = require('ejs');
+const fs = require('fs');
+
+
+//Fjernes senere
+
+
+
+
+
+app.get("/posts", function(req, res){
+    var posts = [
+        {title: "Post 1", description: "Yeees"},
+         {title: "Post 2", description: "Yeees2"},
+         {title: "Post 3", description: "Yeees3"}
+    ];
+    var htmlContent = fs.readFileSync(__dirname + '/views/post.ejs', 'utf8');
+    var htmlRenderized = ejs.render(htmlContent, {filename: 'post.ejs', posts: posts});
+   
+  //  res.render("../src/views/post", {posts: posts});    
+})
+//Fjernes senere
+app.listen(3000,function(){
+    console.log("Listening on portal 3000");
+}); 
 
 let dispatch = Object.create(null);
 dispatch.GET = (request, response) => {
@@ -25,7 +53,9 @@ dispatch.GET = (request, response) => {
         case "post":
             controller = require("./src/controller/post.js");
             response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
-            response.end(controller.aMethod());
+            //response.end(controller.aMethod());
+                            response.end("<div> this is in a div<p>this is in a paragraph</p></div>");
+
             break;
         case "login":
             controller = require("./src/controller/login.js");
@@ -74,23 +104,7 @@ dispatch.POST = (request, response) => {
         }
     })
 }
-//Fjernes senere
-app.get("/posts", function(req, res){
-    var posts = [
-        {title: "Post 1", description: "Yeees"},
-         {title: "Post 2", description: "Yeees2"},
-         {title: "Post 3", description: "Yeees3"}
-    ];
-    res.render("post.ejs", {posts: posts});
-    
 
- 
-    
-})
-//Fjernes senere
-app.listen(3000,function(){
-    console.log("Listening on portal 3000");
-}); 
 
 http.createServer((request, response) => {
     console.log(request.method, request.url);
@@ -98,6 +112,6 @@ http.createServer((request, response) => {
     catch (err) {
         response.writeHead(405, {'Content-Type': 'text/plain'});
         response.end('Method not allowed\n');
-        //console.log(err)
+        console.log(err)
     }
 }).listen(8080);
