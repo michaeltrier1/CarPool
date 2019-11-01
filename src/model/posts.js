@@ -1,54 +1,38 @@
 Class postModel {
 
-    var connect = require('./src/core/database.js');
 
-    Constructor(){
-    }
+      Constructor(){
+      }
 
-    savePost(title, text, fromLocation, toLocation){
+      saveUser(username, email, password){
+          //console.log("entered saveUser")
+          let path = require('path');
+          let databaseCore = require(path.join(__dirname, '../core/database.js'));
+          //console.log("before entering databaseCore connect")
 
-        connect.connect(function(err){
-            if (err) throw err;
-            console.log("Connected");
-            var sql = "INSERT INTO posts (title, text,fromLoaction, toLoaction) VALUES ('"+title+"', '"+text+"','"+fromLocation+"','"+toLocation+"')";  });
+          databaseCore.connect((client) => {
+              //console.log("inside insertUser")
+              let sqlString = "INSERT INTO users(username, email, password) VALUES('"+username+"','"+email+"','"+password+"')";
+              console.log(sqlString)
+              client.query(sqlString,(err, res) =>{
+                  //console.log('inside query');
+                  console.log(res)
+                  client.end();
+              });
+          });
+      }
 
-        con.query(sql, function(err,result){
-            if (err) throw err;
-            console.log("post succesfully inserted");
-            res.end();
-        });
+      getUsers(){
+          let databaseCore = require('./core/database.js');
 
+          client.query('Select * from users',(err, res) =>{
+              console.log('inside query');
+              console.log(res)
+              client.end()
+          });
+      }
+      
 
-    loadPost(postid, title, text, userid, fromLocation, toLocation, timestamp){
-        connect.connect(function(err){
-            if (err) throw err;
-            console.log("Connected");
-            var sql = "SELECT * FROM posts";
-        });
-
-        con.query(sql, function(err,result){
-            if (err) throw err;
-            console.log("post succesfully loaded");
-            res.end();
-        });
-    }
-
-
-    deletePost(postid){
-        connect.connect(function(err){
-            if (err) throw err;
-            console.log("Connected");
-            var sql = "DELETE FROM posts WHERE postid='?'";
-
-        con.query(sql, function(err,result){
-            if (err) throw err;
-            console.log("post succesfully deleted");
-            res.end();
-        });
-    }
-
-}
-
-
+  }
 
 module.exports = new postModel();
