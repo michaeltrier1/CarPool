@@ -1,11 +1,6 @@
-/* eslint-env es6, node */
-/* eslint no-console: 0 */
-
-
 const http = require("http");
 const url = require("url");
 const { parse } = require('querystring');
-
 const ejs = require('ejs');
 const fs = require('fs');
 
@@ -13,39 +8,65 @@ let dispatch = Object.create(null);
 dispatch.GET = (request, response) => {
     let controller;
     let fullPath = url.parse(request.url).pathname.split("/");
-    console.log(request.parser);
 
     switch (fullPath[1]) {
         case "":
         case "index":
             controller = require("./src/controller/index.js");
-            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
-            response.end(controller.aMethod());
+            controller.index((htmlResult) => {
+                response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+                response.end(htmlResult);
+            })
             break;
-        case "post":
+        case "post":  
             controller = require("./src/controller/post.js");
-            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
-            response.end(controller.aMethod());
+            controller.showPosts(fullPath[2], (htmlResult) => {
+                response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+                response.end(htmlResult);
+            })
             break;
         case "login":
             controller = require("./src/controller/login.js");
-            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
-            response.end(controller.aMethod());
+            controller.index((htmlResult) => {
+                response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+                response.end(htmlResult);
+            })
             break;
         case "pool":
             controller = require("./src/controller/pool.js");
-            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
-            response.end(controller.aMethod(fullPath[2]));
+            controller.showPosts(fullPath[2], (htmlResult) => {
+                response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+                response.end(htmlResult);
+            })
             break;
          case "createUser":
             controller = require("./src/controller/createUser.js");
-            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
-            response.end(controller.aMethod());
+            controller.index((htmlResult) => {
+                response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+                response.end(htmlResult);
+            })
             break;
          case "createPool":
             controller = require("./src/controller/createPool.js");
-            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
-            response.end(controller.aMethod());
+            controller.index((htmlResult) => {
+                response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+                response.end(htmlResult);
+            })
+            break;
+        case "test":
+            console.log("this is ze test url")
+            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});   
+            response.end("this is ze test url");
+            /*controller = require("./src/controller/login.js");
+            controller.login2("DERPEMAIL","DERPPW",(htmlResult, success)=>{
+                if (success){
+                    response.writeHead(303, {'Location': '/post' ,"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+                    response.end();
+                } else {
+                    response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});            
+                    response.end(htmlResult);
+                }
+            });  */        
             break;
         default:
             response.writeHead(404, {'Content-Type': 'text/plain', "Access-Control-Allow-Origin": '*'});
@@ -62,44 +83,53 @@ dispatch.POST = (request, response) => {
         message += data.toString();
     })
 
-    request.on('end', dummyVariable =>{
+    request.on('end', () =>{
         let parsedMessage;
         parsedMessage = parse(message)
 
         switch (fullPath[1]) {
-            case "post":
-                controller = require("./src/controller/post.js");
-                response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
-                response.end(controller.aMethod(parsedMessage));
-                 console.log(parsedMessage);
-                break;
-            case "login":       
-
             case "login":
-
                 controller = require("./src/controller/login.js");
-                response.writeHead(200, {"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
-                //response.writeHead(304, {'Location': '/pool' ,"Content-Type": "text/json", "Access-Control-Allow-Origin": '*'});
-                response.end(controller.aMethod(parsedMessage));
-                break;
+                controller.login(parsedMessage, (htmlResult, success)=>{
+                    if (success){
+                        response.writeHead(303, {'Location': '/post' ,"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+                        response.end();
+                    } else {
+                        response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});            
+                        response.end(htmlResult);
+                    }
+                });            
+            break;
             case "createUser":
-            controller = require("./src/controller/createUser.js");
-            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
-            response.end(controller.aMethod());
-            break; 
-              case "createPool":
-            controller = require("./src/controller/createPool.js");
-            response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
-            console.log(parsedMessage);
-            response.end(controller.aMethod());
-            break; 
+                controller = require("./src/controller/createUser.js");
+                controller.createUser(parsedMessage, (success, htmlResult)=>{
+                    if (success){
+                        response.writeHead(303, {'Location': '/login' ,"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+                        response.end();
+                    } else {
+                        response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});            
+                        response.end(htmlResult);
+                    }
+                });
+                break; 
+            case "createPool":
+                controller = require("./src/controller/createPool.js");
+                controller.createUser(parsedMessage, (success, htmlResult)=>{
+                    if (success){
+                        response.writeHead(303, {'Location': '/login' ,"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+                        response.end();
+                    } else {
+                        response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});            
+                        response.end(htmlResult);
+                    }
+                });
+                break; 
             default:
                 response.writeHead(404, {'Content-Type': 'text/plain', "Access-Control-Allow-Origin": '*'});
                 response.end('Not found\n');
         }
     })
 }
-
 
 http.createServer((request, response) => {
     console.log(request.method, request.url);

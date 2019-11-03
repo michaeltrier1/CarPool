@@ -1,8 +1,6 @@
 
 
 function populateCards(array){
-
-
     array.forEach(element => {
         var title = array[0];
         var description = array[1];
@@ -21,17 +19,13 @@ function populateCards(array){
         html += "</div>";
 
         return html;
-
     });
-    
-  
-
 };
 
-    <% posts.forEach(function(post){ %>
-      <li>
-      <%= post.title %>
-          </li>
+<% posts.forEach(function(post){ %>
+    <li>
+        <%= post.title %>
+    </li>
 <%     }) %>
 
 /*<div class="card">

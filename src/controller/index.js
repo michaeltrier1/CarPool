@@ -9,12 +9,11 @@ class indexController {
         this.view = view;
     }
 
-    aMethod(data){
-     var path1 = path.join(__dirname, '../views/index.ejs');
-    var htmlContent = fs.readFileSync(path1, 'utf8');
-    var htmlRenderized = ejs.render(htmlContent, {filename: 'index.ejs'});
-
-        return htmlRenderized;
+    index(callback){
+        var viewPath = path.join(__dirname, '../views/viewRenderer.js');
+        var viewRenderer = require(viewPath)
+        let htmlRenderized = viewRenderer.render("index");
+        callback(htmlRenderized);
     }
 }
 

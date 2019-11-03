@@ -1,38 +1,47 @@
-Class postModel {
+class postModel {
 
+    Constructor(){
+    }
 
-      Constructor(){
-      }
-
-      saveUser(username, email, password){
-          //console.log("entered saveUser")
+    savePost(title, text, from, to, userid, callback){
           let path = require('path');
           let databaseCore = require(path.join(__dirname, '../core/database.js'));
-          //console.log("before entering databaseCore connect")
 
           databaseCore.connect((client) => {
-              //console.log("inside insertUser")
-              let sqlString = "INSERT INTO users(username, email, password) VALUES('"+username+"','"+email+"','"+password+"')";
-              console.log(sqlString)
+              let sqlString = "INSERT INTO posts(title, text, fromLocation, toLocation, userid) VALUES('"+title+"','"+text+"','"+from+"','"+to+"',"+userid+")";
               client.query(sqlString,(err, res) =>{
-                  //console.log('inside query');
-                  console.log(res)
                   client.end();
+                  callback(res)
               });
-          });
-      }
+          });        
+    }
 
-      getUsers(){
-          let databaseCore = require('./core/database.js');
+    getPosts(startPost, numberOfPosts, callback){          
+        let path = require('path');
+        let databaseCore = require(path.join(__dirname,'../core/database.js'));
+        let success = false;
 
-          client.query('Select * from users',(err, res) =>{
-              console.log('inside query');
-              console.log(res)
-              client.end()
-          });
-      }
-      
-
-  }
+        databaseCore.connect((client) => {
+            client.query("SELECT * from posts ORDER BY timestamp DESC LIMIT "+numberOfPosts+" OFFSET "+startPost, (err, res) =>{
+                let results = res.rows;
+                let packagedResults = []
+                results.forEach(function(row) {
+                   let packagedRow = {
+                       "title": row.title,
+                       "text": row.text,
+                       "from": row.fromlocation,
+                       "to": row.tolocation,
+                       "userid": row.userid,
+                       "postid": row.postid
+                   }
+                   packagedResults.push(packagedRow)
+                });
+                
+                client.end();
+                callback(packagedResults)
+            });
+        })
+    }
+}
 
 module.exports = new postModel();

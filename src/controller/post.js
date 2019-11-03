@@ -10,20 +10,39 @@ class postController {
         this.model = model;
         this.view = view;
     }
+    
+    index(callback){
+        showPosts(1, callback);
+    }
 
-    aMethod(data){
-        var posts = [
-        {title: "Post 1", description: "Yeees"},
-         {title: "Post 2", description: "Yeees2"},
-         {title: "Post 3", description: "Yeees3"}
-    ];
-    var path1 = path.join(__dirname, '../views/post.ejs');
-    var htmlContent = fs.readFileSync(path1, 'utf8');
-    var htmlRenderized = ejs.render(htmlContent, {filename: 'post.ejs', posts: posts});
+    showPosts(pageNumber, callback){
+        if (typeof pageNumber !== 'number'){
+            pageNumber = 1;
+        }
+        
+        let postsPerPage = 10;
+        var modelPath = path.join(__dirname, '../model/posts.js');
+        var model = require(modelPath);
+        model.getPosts((pageNumber-1)*postsPerPage, postsPerPage, (dataArray) => {
+            var viewPath = path.join(__dirname, '../views/viewRenderer.js');
+            var viewRenderer = require(viewPath)
+            var htmlRendered = viewRenderer.render('post', dataArray)
+            callback(htmlRendered)     
+        })
+        
+        /*var posts = [
+            {title: "Post 1", description: "Yeees"},
+            {title: "Post 2", description: "Yeees2"},
+            {title: "Post 3", description: "Yeees3"}
+        ];
 
-        return htmlRenderized;
+        var modelPath = path.join(__dirname, '../model/users.js');
+        var model = require(modelPath);
+        
+        var viewPath = path.join(__dirname, '../views/viewRenderer.js');
+        var viewRenderer = require(viewPath)
+        callback(viewRenderer.render('post', posts))'*/
     }
 }
 
-//module.exports = new postController(model, view);
 module.exports = new postController();
