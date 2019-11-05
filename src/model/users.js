@@ -38,11 +38,12 @@ class userModel{
         let success = false;
         
         databaseCore.connect((client) => {
-            client.query("SELECT password from users where email='"+email+"'", (err, res) =>{
+            client.query("SELECT password, userid from users where email='"+email+"'", (err, res) =>{
                 if (res.rows.length > 0 && res.rows[0].password===password){
                     success = true;
+                    let userid = res.rows[0].userid
                     client.end();
-                    callback(success)
+                    callback(success, userid)
                 } else {
                     client.end();
                     callback(success)

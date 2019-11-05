@@ -36,10 +36,10 @@ class loginController {
         var viewPath = path.join(__dirname, '../views/viewRenderer.js');
         var viewRenderer = require(viewPath)
         
-        let result = model.authUser(email, pW, (success) => {
+        let result = model.authUser(email, pW, (success, userid) => {
             if (success) {
                 var htmlRendered = viewRenderer.render('viewPools');
-                callback(htmlRendered, true)
+                callback(htmlRendered, true, userid)
             } else {
                 var htmlRendered = viewRenderer.render('login');
                 callback(htmlRendered, false)

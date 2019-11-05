@@ -49,7 +49,7 @@ class postModel {
         let databaseCore = require(path.join(__dirname,'../core/database.js'));
 
         databaseCore.connect((client) => {
-            client.query("SELECT * from posts WHERE tolocation = "+to+" AND fromlocaton = "+from+" ORDER BY timestamp DESC", (err, res) =>{
+            client.query("SELECT * from posts WHERE tolocation = '"+to+"' AND fromlocation = '"+from+"' ORDER BY timestamp DESC", (err, res) =>{
                 let results = res.rows;
                 let packagedResults = []
                 results.forEach(function(row) {
