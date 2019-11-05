@@ -3,6 +3,17 @@ const url = require("url");
 const { parse } = require('querystring');
 const ejs = require('ejs');
 const fs = require('fs');
+/*
+'Set-Cookie': 'myCookie={"id": "someID"}'
+
+let cookiesd = req.headers.cookie;
+
+if (cookiesd != undefined){
+		let cookieBody = cookiesd.split("=");
+		let jsonCookie = JSON.parse(cookieBody[1]);
+		let id = jsonCookie.id;
+}
+*/
 
 let dispatch = Object.create(null);
 dispatch.GET = (request, response) => {
