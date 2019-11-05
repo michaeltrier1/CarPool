@@ -29,7 +29,7 @@ class postController {
             var htmlRendered = viewRenderer.render('post', dataArray)
             callback(htmlRendered)     
         })
-        
+        searchPosts()
         /*var posts = [
             {title: "Post 1", description: "Yeees"},
             {title: "Post 2", description: "Yeees2"},
