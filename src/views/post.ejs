@@ -69,25 +69,46 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="index">Home</a></li>
                     <li><a href="post">Posts</a></li>
-                    <li><a href="CreatePool">Create Post</a></li>
+                    <li><a href="createPool">Create Post</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="createUser"><span class="glyphicon glyphicon-sunglasses"></span> Register</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container-fluid text-left">
+   <div class="container" style="background-color:lightgray;">
         <h1>SDU PENDLING</h1>
+        
+
+
+         
+  <form action="search" method="POST" onsubmit=""> 
+       <div class="form-row">
+    <div class="col"> 
+      <label class="form-label h5">To</label>
+      <input type="text" id="toDestination" name="toDestination" class="form-control" />   
+     <div class="col">  
+          <label class="form-label h5">From</label>
+      <input type="text" name="fromDestination" class="form-control" id="fromDestination"/> 
+      <input type="submit"  name="submit" id="submit" value='Search posts' class="btn btn-primary btn-block"/>
+       </div>
+       </div>
+       </div>
+     </form>
+       </div>
+        
+
+
         <% viewbag.forEach(function(post){ %>
             <li>
                 <span><%= post.title %> </span>
+                 <span><%= post.description %> </span>
                 <span><%= post.postid %> </span>
             </li>
         <% }) %>
-    </div>
-    <div class="container" style="background-color:pink;">
-    </div>
+   
 </body>
 
 </html>
