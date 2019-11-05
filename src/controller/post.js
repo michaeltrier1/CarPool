@@ -29,7 +29,6 @@ class postController {
             var htmlRendered = viewRenderer.render('post', dataArray)
             callback(htmlRendered)     
         })
-        
     }
     
     searchPosts(data, callback){

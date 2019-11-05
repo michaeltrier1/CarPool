@@ -67,6 +67,7 @@ class postModel {
                 client.end();
                 callback(packagedResults)
             });
+        })
     }
 }
 
