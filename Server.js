@@ -127,9 +127,8 @@ dispatch.POST = (request, response) => {
             case "post":
                 controller = require("./src/controller/post.js");
                 controller.searchPosts(parsedMessage, (htmlResult)=>{
-                        response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});            
-                        response.end(htmlResult);
-                    }
+                    response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});            
+                    response.end(htmlResult);
                 });
                 break; 
             default:
