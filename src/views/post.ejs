@@ -69,7 +69,7 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="index">Home</a></li>
                     <li><a href="post">Posts</a></li>
-                    <li><a href="CreatePool">Create Post</a></li>
+                    <li><a href="createPool">Create Post</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -79,6 +79,28 @@
     </nav>
     <div class="container-fluid text-left">
         <h1>SDU PENDLING</h1>
+        
+                
+      <div class ="container">  
+      <div class="row">
+         
+  <form action="search" method="POST" onsubmit=""> 
+       <div class="col-sm">  
+      <label class="form-label h5">To</label>
+      <input type="text" id="toDestination" name="toDestination" class="form-control" />   
+     <div class="col-sm">  
+          <label class="form-label h5">From</label>
+      <input type="text" name="fromDestination" class="form-control" id="fromDestination"/> 
+
+  
+      <input type="submit"  name="submit" id="submit" value='search' class="btn btn-primary btn-block"/>
+       </div>
+     </form>
+       </div>
+          </div>
+        </div>
+
+
         <% viewbag.forEach(function(post){ %>
             <li>
                 <span><%= post.title %> </span>
