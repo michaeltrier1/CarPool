@@ -30,18 +30,23 @@ class postController {
             callback(htmlRendered)     
         })
         
-        /*var posts = [
-            {title: "Post 1", description: "Yeees"},
-            {title: "Post 2", description: "Yeees2"},
-            {title: "Post 3", description: "Yeees3"}
-        ];
-
-        var modelPath = path.join(__dirname, '../model/users.js');
+    }
+    
+    searchPosts(data, callback){
+        var modelPath = path.join(__dirname, '../model/posts.js');
         var model = require(modelPath);
         
-        var viewPath = path.join(__dirname, '../views/viewRenderer.js');
-        var viewRenderer = require(viewPath)
-        callback(viewRenderer.render('post', posts))'*/
+        let from = data.fromDestination;
+        let to = data.toDestination;
+        
+        model.searchPosts(from, to, () => {
+            var viewPath = path.join(__dirname, '../views/viewRenderer.js');
+            var viewRenderer = require(viewPath)
+            var htmlRendered = viewRenderer.render('post', dataArray)
+            callback(htmlRendered)   
+        })
+        
+        
     }
 }
 

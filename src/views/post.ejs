@@ -73,43 +73,57 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="createUser"><span class="glyphicon glyphicon-sunglasses"></span> Register</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container-fluid text-left">
+   <div class="container" style="background-color:lightgray;">
         <h1>SDU PENDLING</h1>
         
-                
-      <div class ="container">  
-      <div class="row">
+
+
          
   <form action="search" method="POST" onsubmit=""> 
-       <div class="col-sm">  
+       <div class="form-row">
+    <div class="col"> 
       <label class="form-label h5">To</label>
       <input type="text" id="toDestination" name="toDestination" class="form-control" />   
-     <div class="col-sm">  
+     <div class="col">  
           <label class="form-label h5">From</label>
       <input type="text" name="fromDestination" class="form-control" id="fromDestination"/> 
-
-  
-      <input type="submit"  name="submit" id="submit" value='search' class="btn btn-primary btn-block"/>
+      <input type="submit"  name="submit" id="submit" value='Search posts' class="btn btn-primary btn-block"/>
+       </div>
+       </div>
        </div>
      </form>
        </div>
-          </div>
-        </div>
+        
 
-
+   <div class="container" style="background-color:gray;">
+    <div class="card" style="width: 18rem; background-color:pink">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
         <% viewbag.forEach(function(post){ %>
-            <li>
+            <div class="card" style="width: 18rem; background-color:pink">
+            <div class="card-body">    
+                  <h5 class="card-title"><%= post.title %></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= post.toLocation %></h6>
+                      <h6 class="card-subtitle mb-2 text-muted"><%= post.fromlocation %></h6>
+                          <p class="card-text"><%= post.description %> </p>
+
                 <span><%= post.title %> </span>
+                 <span><%= post.description %> </span>
                 <span><%= post.postid %> </span>
             </li>
         <% }) %>
-    </div>
-    <div class="container" style="background-color:pink;">
-    </div>
+   </div>
 </body>
 
 </html>

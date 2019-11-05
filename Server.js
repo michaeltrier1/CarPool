@@ -124,6 +124,13 @@ dispatch.POST = (request, response) => {
                     }
                 });
                 break; 
+            case "post":
+                controller = require("./src/controller/post.js");
+                controller.searchPosts(parsedMessage, (htmlResult)=>{
+                    response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});            
+                    response.end(htmlResult);
+                });
+                break; 
             default:
                 response.writeHead(404, {'Content-Type': 'text/plain', "Access-Control-Allow-Origin": '*'});
                 response.end('Not found\n');
