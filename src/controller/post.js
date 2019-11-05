@@ -38,7 +38,7 @@ class postController {
         let from = data.fromDestination;
         let to = data.toDestination;
         
-        model.searchPosts(from, to, () => {
+        model.searchPosts(from, to, (dataArray) => {
             var viewPath = path.join(__dirname, '../views/viewRenderer.js');
             var viewRenderer = require(viewPath)
             var htmlRendered = viewRenderer.render('post', dataArray)
