@@ -90,18 +90,18 @@
       <form action="createPool" method="POST" onsubmit="">
         <div class="col">
           <label class="form-label h5">Title</label>
-          <input type="text" name="title" id="title" class="form-control" />
+          <input type="text" name="title" id="title" class="form-control" required />
           <label class="form-label h5">From</label>
-          <input type="text" name="fromDestination" id="fromDestination" class="form-control" />
+          <input type="text" name="fromDestination" id="fromDestination" class="form-control" required/>
           <label class="form-label h5">To</label>
-          <input type="text" name ="toDestination" id="toDestination" class="form-control" />
+          <input type="text" name ="toDestination" id="toDestination" class="form-control" required/>
           <label class="form-label h5">Description</label>
           <br>
-          <textarea name="description" rows="10" cols="90" id="description"  class="form-control"></textarea>
+          <textarea name="description" rows="10" cols="90" id="description"  class="form-control" required></textarea>
           <br>
         </div>
         <div class="col">
-          <input type="submit" name="submitPost" id="submitPost" value='createPool' class="btn btn-primary btn-block" />
+          <input type="submit" name="submitPost" id="submitPost" value='Create Post' class="btn btn-primary btn-block" />
       </form>
     </div>
   </div>

@@ -114,9 +114,9 @@ dispatch.POST = (request, response) => {
                 break; 
             case "createPool":
                 controller = require("./src/controller/createPool.js");
-                controller.createUser(parsedMessage, (success, htmlResult)=>{
+                controller.createPool(parsedMessage, (success, htmlResult)=>{
                     if (success){
-                        response.writeHead(303, {'Location': '/login' ,"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
+                        response.writeHead(303, {'Location': '/post' ,"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});
                         response.end();
                     } else {
                         response.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": '*'});            
