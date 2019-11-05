@@ -84,14 +84,14 @@
 
 
          
-  <form action="search" method="POST" onsubmit=""> 
-       <div class="form-row">
-    <div class="col"> 
-      <label class="form-label h5">To</label>
-      <input type="text" id="toDestination" name="toDestination" class="form-control" />   
-     <div class="col">  
-          <label class="form-label h5">From</label>
-      <input type="text" name="fromDestination" class="form-control" id="fromDestination"/> 
+  <form action="" method="POST" onsubmit=""> 
+   <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="inputEmail4">From</label>
+      <input type="text" id="fromDestination" name="fromDestination" class="form-control" />   
+ <div class="form-group col-md-6">
+         <label for="inputEmail4">To</label>
+      <input type="text" name="toDestination" class="form-control" id="toDestination"/> 
       <input type="submit"  name="submit" id="submit" value='Search posts' class="btn btn-primary btn-block"/>
        </div>
        </div>
@@ -101,29 +101,33 @@
         
 
    <div class="container" style="background-color:gray;">
-    <div class="card" style="width: 18rem; background-color:pink">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
-</div>
+  
+
         <% viewbag.forEach(function(post){ %>
+    
             <div class="card" style="width: 18rem; background-color:pink">
             <div class="card-body">    
-                  <h5 class="card-title"><%= post.title %></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><%= post.toLocation %></h6>
-                      <h6 class="card-subtitle mb-2 text-muted"><%= post.fromlocation %></h6>
-                          <p class="card-text"><%= post.description %> </p>
-
-                <span><%= post.title %> </span>
-                 <span><%= post.description %> </span>
-                <span><%= post.postid %> </span>
-            </li>
-        <% }) %>
-   </div>
+                  <h4 class="card-title">Title: <%= post.title %></h4>
+                    <h5 class="card-subtitle mb-2">To:<%= post.to %></h5>
+                      <h5 class="card-subtitle mb-2">From:<%= post.from %></h5>
+                          <p class="card-text">Description: <%= post.text %> </p>
+                          </div>    
+                            </div>
+        
+     <%   }) %>
+     <form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Email</label>
+      <input type="text" id="toDestination" name="toDestination" class="form-control" />   
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Password</label>
+     <input type="text" name="fromDestination" class="form-control" id="fromDestination"/> 
+    </div>
+  </div>
+  </form>
+ 
 </body>
 
 </html>
