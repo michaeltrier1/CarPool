@@ -1,6 +1,6 @@
 const http = require("http");
 const url = require("url");
-const { parse } = require('querystring');
+const queryString = require('querystring');
 const ejs = require('ejs');
 const fs = require('fs');
 
@@ -99,7 +99,7 @@ dispatch.POST = (request, response) => {
 
     request.on('end', () =>{
         let parsedMessage;
-        parsedMessage = parse(message)
+        parsedMessage = queryString.parse(message)
 
         switch (fullPath[1]) {
             case "login":
